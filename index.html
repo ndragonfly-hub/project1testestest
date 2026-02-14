@@ -6,18 +6,24 @@
   <title>💘</title>
   <style>
     :root{
-      --bg1:#0b1020;
-      --bg2:#111827;
-      --card:#0b1220cc;
-      --text:#e5e7eb;
-      --muted:#9ca3af;
-      --green:#22c55e;
-      --red:#ef4444;
-      --pink:#fb7185;
-      --pink2:#fda4af;
+      --bg: #B51A3A;
+      --card: #5E081E;
+      --text: #FFF1F2;
+      --muted: rgba(255,241,242,0.82);
+
+      --green1:#16a34a;
+      --green2:#22c55e;
+
+      --red1:#b91c1c;
+      --red2:#ef4444;
+
+      --pink1:#FB7185;
+      --pink2:#FDA4AF;
+      --shadow: rgba(0,0,0,0.45);
     }
 
     *{ box-sizing:border-box; }
+
     body{
       margin:0;
       min-height:100vh;
@@ -26,45 +32,63 @@
       padding:24px;
       font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
       color:var(--text);
-      background:
-        radial-gradient(900px 600px at 20% 10%, #fb718533, transparent 60%),
-        radial-gradient(900px 600px at 80% 90%, #a78bfa33, transparent 60%),
-        linear-gradient(135deg, var(--bg1), var(--bg2));
+      background: var(--bg);
       overflow:hidden;
     }
 
+    /* delikatny “glow” w tle */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:-20%;
+      background:
+        radial-gradient(900px 600px at 20% 15%, rgba(255,241,242,0.22), transparent 60%),
+        radial-gradient(800px 600px at 80% 85%, rgba(251,113,133,0.22), transparent 60%);
+      pointer-events:none;
+      filter: blur(6px);
+      opacity: 0.9;
+    }
+
     .card{
-      width:min(560px, 92vw);
-      border:1px solid #ffffff1a;
-      background:var(--card);
-      border-radius:20px;
-      padding:22px 18px;
-      box-shadow: 0 18px 60px #00000066;
+      width:min(620px, 94vw);
+      border:1px solid rgba(255,241,242,0.20);
+      background: rgba(94, 8, 30, 0.92); /* #5E081E */
+      border-radius:22px;
+      padding:26px 18px 20px;
+      box-shadow: 0 18px 60px var(--shadow);
       backdrop-filter: blur(10px);
       text-align:center;
       position:relative;
+      z-index:1;
     }
 
     h1{
-      margin:6px 0 10px;
-      font-size:26px;
+      margin: 4px 0 10px;
+      font-size: 28px;
       line-height:1.2;
       letter-spacing:0.2px;
+      color: #ffffff;
     }
 
     .subtitle{
-      margin:0 0 16px;
-      color:var(--muted);
-      line-height:1.5;
-      font-size:14px;
+      margin:0 0 14px;
+      color: var(--muted);
+      line-height: 1.45;
+      font-size: 15px;
+    }
+
+    .tip{
+      margin-top: 12px;
+      font-size: 12px;
+      color: rgba(255,241,242,0.75);
     }
 
     .btns{
       display:flex;
-      gap:10px;
-      flex-wrap:wrap;
+      gap:12px;
       justify-content:center;
-      margin-top:10px;
+      flex-wrap:wrap;
+      margin-top: 12px;
     }
 
     button{
@@ -74,106 +98,139 @@
       font-size:16px;
       font-weight:800;
       cursor:pointer;
-      min-width:200px;
-      box-shadow: 0 10px 30px #00000055;
+      min-width: 210px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.35);
+      transition: transform .08s ease, filter .15s ease;
+      user-select:none;
+      -webkit-tap-highlight-color: transparent;
     }
 
+    button:hover{ filter: brightness(1.03); }
+    button:active{ transform: translateY(1px) scale(0.99); }
+
     .yes{
-      background: linear-gradient(90deg, #16a34a, var(--green));
+      background: linear-gradient(90deg, var(--green1), var(--green2));
       color:#06210f;
     }
 
     .obviously{
-      background: linear-gradient(90deg, #dc2626, var(--red));
-      color:#250607;
+      background: linear-gradient(90deg, var(--red1), var(--red2));
+      color:#240606;
     }
-
-    button:active{ transform: translateY(1px); }
 
     /* Widoki */
     .view{ display:none; }
-    .view.active{ display:block; }
+    .view.active{ display:block; animation: fadeUp .28s ease-out; }
 
-    /* Serce */
-    .heart-wrap{
-      width:min(260px, 70vw);
-      height:min(260px, 70vw);
-      margin: 10px auto 12px;
+    @keyframes fadeUp{
+      from{ opacity:0; transform: translateY(8px); }
+      to{ opacity:1; transform: translateY(0); }
+    }
+
+    /* Serce (mniejsze) */
+    .loveWrap{
+      margin: 4px auto 6px;
+      width: min(240px, 70vw);
+      height: min(210px, 62vw);
+      position:relative;
       display:grid;
       place-items:center;
-      position:relative;
-      filter: drop-shadow(0 18px 40px #00000088);
+      filter: drop-shadow(0 16px 40px rgba(0,0,0,0.45));
     }
 
     .heart{
-      width: 220px;
-      height: 220px;
-      background: radial-gradient(circle at 30% 30%, #ffffffcc, transparent 35%),
-                  linear-gradient(135deg, var(--pink), var(--pink2));
-      transform: rotate(-45deg);
-      border-radius: 24px;
+      width: 170px;
+      height: 170px;
       position:relative;
-      animation: pulse 1.3s ease-in-out infinite;
+      transform: rotate(-45deg);
+      border-radius: 22px;
+      overflow:hidden;
+      /* start: różowe */
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.75), transparent 38%),
+                  linear-gradient(135deg, var(--pink1), var(--pink2));
+      animation: pulse 1.25s ease-in-out infinite;
     }
 
     .heart::before,
     .heart::after{
       content:"";
       position:absolute;
-      width: 220px;
-      height: 220px;
+      width: 170px;
+      height: 170px;
       background: inherit;
       border-radius: 50%;
     }
-    .heart::before{ top:-110px; left:0; }
-    .heart::after{ left:110px; top:0; }
+    .heart::before{ top:-85px; left:0; }
+    .heart::after{ left:85px; top:0; }
 
     @keyframes pulse{
       0%,100%{ transform: rotate(-45deg) scale(1); }
       50%{ transform: rotate(-45deg) scale(1.06); }
     }
 
-    /* Połysk */
+    /* połysk na sercu */
     .shine{
       position:absolute;
-      inset:-40%;
-      background: linear-gradient(120deg, transparent 40%, #ffffff55 50%, transparent 60%);
+      inset:-60%;
+      background: linear-gradient(120deg, transparent 42%, rgba(255,255,255,0.55) 50%, transparent 58%);
       transform: rotate(10deg);
-      animation: shine 2.2s linear infinite;
+      animation: shine 2.0s linear infinite;
       pointer-events:none;
       mix-blend-mode: screen;
+      opacity:0.9;
     }
-
     @keyframes shine{
       from{ transform: translateX(-40%) rotate(10deg); }
       to{ transform: translateX(40%) rotate(10deg); }
     }
 
+    /* zdjęcie w sercu (po chwili) */
+    .photoLayer{
+      position:absolute;
+      inset:0;
+      border-radius: 22px;
+      overflow:hidden;
+      opacity:0;
+      transform: scale(1.02);
+      transition: opacity 550ms ease, transform 550ms ease;
+      background: url("photo1.jpg") center/cover no-repeat;
+      filter: saturate(1.05) contrast(1.02);
+    }
+    .photoOn .photoLayer{
+      opacity:1;
+      transform: scale(1);
+    }
+
+    /* tekst w walentynce */
     .msg{
       margin: 10px 0 0;
-      font-size:16px;
-      line-height:1.45;
+      font-size: 16px;
+      line-height: 1.45;
+      color: rgba(255,241,242,0.95);
     }
-    .msg strong{ color: var(--pink2); }
-
-    .tiny{
-      margin-top:10px;
-      font-size:12px;
-      color:var(--muted);
+    .msg strong{
+      color: #ffffff;
     }
 
-    /* Latające serduszka w tle */
+    .sign{
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(255,241,242,0.78);
+    }
+
+    /* Latające serduszka */
     .hearts{
       position:fixed;
       inset:0;
       pointer-events:none;
-      opacity:.35;
+      opacity:.38;
+      z-index:0;
     }
     .float-heart{
       position:absolute;
       bottom:-30px;
       animation: floatUp linear forwards;
-      filter: drop-shadow(0 6px 10px #00000088);
+      filter: drop-shadow(0 6px 10px rgba(0,0,0,0.45));
     }
     @keyframes floatUp{
       from{ transform: translateY(0); opacity:0; }
@@ -182,36 +239,38 @@
     }
   </style>
 </head>
+
 <body>
   <div class="hearts" aria-hidden="true"></div>
 
   <main class="card">
-    <!-- Widok 1 -->
+    <!-- Ekran 1 -->
     <section id="viewAsk" class="view active">
       <h1>Jacku, czy będziesz moją Walentynką?</h1>
-      <p class="subtitle">Masz do wyboru dwie odpowiedzi. Obie są poprawne. 😄</p>
+      <p class="subtitle">Masz do wyboru tylko jedną z opcji. Nie spi**dol tego.</p>
 
       <div class="btns">
         <button class="yes" id="btnYes">TAK</button>
-        <button class="obviously" id="btnObviously">OCZYWIŚCIE, ŻE TAK</button>
+        <button class="obviously" id="btnObviously">TAK, ALE CZERWONE</button>
       </div>
 
-      <div class="tiny">Tip: kliknij dowolny przycisk. To jest podchwytliwe pytanie.</div>
+      <div class="tip">Chyba nie myślałeś, że możesz odpowiedzieć inaczej?❤️</div>
     </section>
 
-    <!-- Widok 2 -->
+    <!-- Ekran 2 -->
     <section id="viewLove" class="view">
-      <div class="heart-wrap" aria-hidden="true">
-        <div class="heart"></div>
+      <div class="loveWrap" aria-hidden="true">
+        <div id="heartBox" class="heart">
+          <div class="photoLayer"></div>
+        </div>
         <div class="shine"></div>
       </div>
 
       <p class="msg">
         <strong>Kocham Cię, Skarbie.</strong><br/>
-        Wróć mi tu bezpiecznie z gór.
+        Baw się dobrze w górach i wracaj do nas bezpiecznie.
       </p>
-
-      <div class="tiny">— Twoja Natalia 💘</div>
+      <div class="sign">— Twoja Natalia 💘</div>
     </section>
   </main>
 
@@ -221,10 +280,16 @@
     const btnYes = document.getElementById("btnYes");
     const btnObviously = document.getElementById("btnObviously");
     const heartsWrap = document.querySelector(".hearts");
+    const heartBox = document.getElementById("heartBox");
 
     function showLove(){
       viewAsk.classList.remove("active");
       viewLove.classList.add("active");
+
+      // start serca: różowe. po chwili pokazujemy zdjęcie w sercu
+      heartBox.classList.remove("photoOn");
+      setTimeout(() => heartBox.classList.add("photoOn"), 650);
+
       burstHearts();
     }
 
@@ -234,7 +299,7 @@
     function burstHearts(){
       const emojis = ["❤️","💗","💖","💘","💞"];
       for(let i=0;i<22;i++){
-        setTimeout(() => spawnHeart(emojis[Math.floor(Math.random()*emojis.length)]), i*60);
+        setTimeout(() => spawnHeart(emojis[Math.floor(Math.random()*emojis.length)]), i*55);
       }
       setInterval(() => spawnHeart(emojis[Math.floor(Math.random()*emojis.length)]), 750);
     }

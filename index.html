@@ -1,0 +1,62 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>❤️</title>
+<style>
+body{
+  margin:0;
+  height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  background:#111827;
+  font-family:system-ui;
+  color:white;
+  text-align:center;
+}
+.heart{
+  width:200px;
+  height:200px;
+  background:url("nasze.jpg") center/cover no-repeat;
+  transform:rotate(-45deg);
+  border-radius:20px;
+  position:relative;
+  cursor:pointer;
+}
+.heart:before,
+.heart:after{
+  content:"";
+  position:absolute;
+  width:200px;
+  height:200px;
+  background:inherit;
+  border-radius:50%;
+}
+.heart:before{ top:-100px; left:0; }
+.heart:after{ left:100px; top:0; }
+.secret{
+  display:none;
+  margin-top:20px;
+}
+</style>
+</head>
+<body>
+
+<div>
+  <div class="heart" onclick="showMessage()"></div>
+  <div class="secret" id="msg">
+    <h2>Kocham Cię ❤️</h2>
+    <p>Wróć bezpiecznie z gór.</p>
+  </div>
+</div>
+
+<script>
+function showMessage(){
+  document.getElementById("msg").style.display="block";
+}
+</script>
+
+</body>
+</html>
